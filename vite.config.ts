@@ -8,7 +8,8 @@ import vue from '@vitejs/plugin-vue'
 
 // https://vite.dev/config/
 export default defineConfig({
-  base: process.env.NODE_ENV === 'production' ? '/note/' : '/',
+  // base: process.env.NODE_ENV === 'production' ? '/note/' : '/',
+  base: '/note_vue3/',
 
   plugins: [
     vue({
@@ -33,11 +34,11 @@ export default defineConfig({
         rewrite: (path) => path.replace(/^\/api/, '') // 重写路径
       }
     }
-  },
-  build: {
-    outDir: "../build/dist"
-
   }
+  // build: {
+  //   outDir: "../build/dist"
+
+  // }
 
 
 })
