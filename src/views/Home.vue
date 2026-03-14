@@ -120,15 +120,16 @@ async function watchCount(id: number, watchCount: number) {
         watchCount: watchCount
     })
     await loadArticle()
-
 }
-let refreshTimer = null
-onMounted(() => {
-    // 每30秒刷新一次（可根据需要调整时间间隔）
-    refreshTimer = setInterval(() => {
-        loadArticle()
-    }, 30000) // 30000毫秒 = 30秒
-})
+
+// let refreshTimer = null
+// onMounted(() => {
+//     // 每30秒刷新一次（可根据需要调整时间间隔）
+//     refreshTimer = setInterval(() => {
+//         loadArticle()
+//     }, 30000) // 30000毫秒 = 30秒
+// })
+
 loadArticle()
 </script>
 <style scoped>

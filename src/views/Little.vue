@@ -150,13 +150,13 @@ let refreshTimer = null
 watch(orderBy, () => {
     loadNotes()
 })
-onMounted(() => {
-    // 每30秒刷新一次（可根据需要调整时间间隔）
-    refreshTimer = setInterval(() => {
-        console.log('定时刷新笔记列表...')
-        loadNotes()
-    }, 20000) // 30000毫秒 = 30秒
-})
+// onMounted(() => {
+//     // 每30秒刷新一次（可根据需要调整时间间隔）
+//     refreshTimer = setInterval(() => {
+//         console.log('定时刷新笔记列表...')
+//         loadNotes()
+//     }, 20000) // 30000毫秒 = 30秒
+// })
 loadNotes()
 
 </script>
