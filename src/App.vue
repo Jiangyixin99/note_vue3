@@ -26,11 +26,11 @@
                         主页
                     </router-link>
                 </div>
-                <!-- <div>
+                <div>
                     <router-link to="/home" class="nav">
                         归档
                     </router-link>
-                </div> -->
+                </div>
                 <div>
                     <router-link to="/about" class="nav">
                         关于
