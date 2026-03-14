@@ -17,17 +17,36 @@
     setup
     lang="ts"
 >
-import { ref } from 'vue';
+import { ref, onMounted } from 'vue';
 
 const newMessage = ref('');
 const messages = ref<string[]>([]);
+
+// 从localStorage读取留言
+const loadMessages = () => {
+    const storedMessages = localStorage.getItem('messages');
+    if (storedMessages) {
+        messages.value = JSON.parse(storedMessages);
+    }
+};
+
+// 保存留言到localStorage
+const saveMessages = () => {
+    localStorage.setItem('messages', JSON.stringify(messages.value));
+};
 
 const addMessage = () => {
     if (newMessage.value.trim()) {
         messages.value.push(newMessage.value);
         newMessage.value = '';
+        saveMessages();
     }
 };
+
+// 组件挂载时加载留言
+onMounted(() => {
+    loadMessages();
+});
 </script>
 <style>
 .app {
