@@ -34,13 +34,11 @@ export default defineConfig({
         rewrite: (path) => path.replace(/^\/api/, '') // 重写路径
       }
     }
+  },
+
+  build: {
+    outDir: 'dist' // 明确指定构建输出目录
   }
-  // build: {
-  //   outDir: "../build/dist"
-
-  // }
-
-
 })
 
 function vueMarkdown(): import("vite").PluginOption {
