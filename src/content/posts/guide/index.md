@@ -1,5 +1,5 @@
 ---
-title: 这是一个示例
+title: Blog User Guide
 published: 2024-04-01
 description: "How to use this blog template."
 image: "./cover.jpeg"
