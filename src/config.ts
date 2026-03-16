@@ -12,12 +12,12 @@ export const siteConfig: SiteConfig = {
 	subtitle: "3213213",
 	lang: "zh_CN", // 语言代码，例如：'en', 'zh_CN', 'ja'等
 	themeColor: {
-		hue: 250, // 主题颜色的默认色相，范围0-360。例如：红色：0，青色：200，蓝绿色：250，粉色：345
+		hue: 155, // 主题颜色的默认色相，范围0-360。例如：红色：0，青色：200，蓝绿色：250，粉色：345
 		fixed: false, // 对访客隐藏主题颜色选择器
 	},
 	banner: {
 		enable: true,
-		src: "assets/images/banner.png", // 相对于/src目录的路径。如果以'/'开头，则相对于/public目录
+		src: "assets/images/banner.webp", // 相对于/src目录的路径。如果以'/'开头，则相对于/public目录
 		position: "center", // 相当于object-position，只支持'top', 'center', 'bottom'。默认为'center'
 		credit: {
 			enable: false, // 显示横幅图片的 credits 文本
