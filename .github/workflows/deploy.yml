@@ -50,14 +50,22 @@ jobs:
       # 上传图片到阿里云OSS
       - name: Install ossutil (阿里云OSS命令行工具)
         run: |
-          # 下载ossutil工具
-          wget https://gosspublic.alicdn.com/ossutil/1.7.19/ossutil64 -O ossutil
+          # 下载ossutil 2.2.1版本（最新的2.0版本）
+          wget https://gosspublic.alicdn.com/ossutil/v2/2.2.1/ossutil-2.2.1-linux-amd64.zip -O ossutil.zip
+          # 解压
+          unzip ossutil.zip
+          # 进入目录
+          cd ossutil-2.2.1-linux-amd64
+          # 复制可执行文件到根目录
+          cp ossutil ../ossutil
+          # 回到根目录
+          cd ..
           # 添加执行权限
           chmod +x ossutil
 
       - name: Configure ossutil
         run: |
-          # 配置ossutil，使用GitHub Secrets中存储的凭证
+          # 配置ossutil 使用GitHub Secrets中存储的凭证
           ./ossutil config -e ${OSS_ENDPOINT} -i ${OSS_ACCESS_KEY_ID} -k ${OSS_ACCESS_KEY_SECRET} --loglevel info
         env:
           # 从GitHub Secrets中获取环境变量
