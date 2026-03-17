@@ -47,6 +47,33 @@ jobs:
           echo "Dist directory contents:"
           ls -la dist/ || echo "Dist directory not found"
 
+      # 上传图片到阿里云OSS
+      - name: Install ossutil (阿里云OSS命令行工具)
+        run: |
+          # 下载ossutil工具
+          wget https://gosspublic.alicdn.com/ossutil/1.7.19/ossutil64 -O ossutil
+          # 添加执行权限
+          chmod +x ossutil
+
+      - name: Configure ossutil
+        run: |
+          # 配置ossutil，使用GitHub Secrets中存储的凭证
+          ./ossutil config -e ${OSS_ENDPOINT} -i ${OSS_ACCESS_KEY_ID} -k ${OSS_ACCESS_KEY_SECRET} --loglevel info
+        env:
+          # 从GitHub Secrets中获取环境变量
+          OSS_ENDPOINT: ${{ secrets.OSS_ENDPOINT }}
+          OSS_ACCESS_KEY_ID: ${{ secrets.OSS_ACCESS_KEY_ID }}
+          OSS_ACCESS_KEY_SECRET: ${{ secrets.OSS_ACCESS_KEY_SECRET }}
+
+      - name: Upload images to OSS
+        run: |
+          # 上传dist目录下的图片到OSS
+          # --update参数表示只上传更新的文件
+          ./ossutil cp -r ./dist/assets/images oss://${OSS_BUCKET}/assets/images --update
+        env:
+          # 从GitHub Secrets中获取bucket名称
+          OSS_BUCKET: ${{ secrets.OSS_BUCKET }}
+
       - name: Setup Pages
         uses: actions/configure-pages@v4
 

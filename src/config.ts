@@ -17,7 +17,7 @@ export const siteConfig: SiteConfig = {
 	},
 	banner: {
 		enable: true,
-		src: "assets/images/banner.webp", // 相对于/src目录的路径。如果以'/'开头，则相对于/public目录
+		src: "https://jiangyixin.oss-cn-beijing.aliyuncs.com/assets/images/banner.png", // 相对于/src目录的路径。如果以'/'开头，则相对于/public目录
 		position: "center", // 相当于object-position，只支持'top', 'center', 'bottom'。默认为'center'
 		credit: {
 			enable: false, // 显示横幅图片的 credits 文本
@@ -53,7 +53,7 @@ export const navBarConfig: NavBarConfig = {
 };
 
 export const profileConfig: ProfileConfig = {
-	avatar: "assets/images/qq_4.png", // 相对于/src目录的路径。如果以'/'开头，则相对于/public目录
+	avatar: "https://jiangyixin.oss-cn-beijing.aliyuncs.com/assets/images/qq_4.png", // 相对于/src目录的路径。如果以'/'开头，则相对于/public目录
 	name: "Jiangyixin",
 	bio: "Hello",
 	links: [
