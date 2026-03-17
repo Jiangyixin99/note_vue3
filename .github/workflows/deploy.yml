@@ -63,24 +63,17 @@ jobs:
           # 添加执行权限
           chmod +x ossutil
 
-      - name: Configure ossutil
+      - name: Upload images to OSS
         run: |
-          # 配置ossutil 使用非交互式命令
-          # 直接使用命令行参数指定配置，避免交互式输入
-          ./ossutil config --endpoint ${OSS_ENDPOINT} --access-key-id ${OSS_ACCESS_KEY_ID} --access-key-secret ${OSS_ACCESS_KEY_SECRET} --config-file /home/runner/.ossutilconfig
+          # 上传dist目录下的图片到OSS
+          # 直接在命令中指定凭证参数，避免配置步骤
+          # --update参数表示只上传更新的文件
+          ./ossutil cp -r ./dist/assets/images oss://${OSS_BUCKET}/assets/images --update --endpoint ${OSS_ENDPOINT} --access-key-id ${OSS_ACCESS_KEY_ID} --access-key-secret ${OSS_ACCESS_KEY_SECRET}
         env:
           # 从GitHub Secrets中获取环境变量
           OSS_ENDPOINT: ${{ secrets.OSS_ENDPOINT }}
           OSS_ACCESS_KEY_ID: ${{ secrets.OSS_ACCESS_KEY_ID }}
           OSS_ACCESS_KEY_SECRET: ${{ secrets.OSS_ACCESS_KEY_SECRET }}
-
-      - name: Upload images to OSS
-        run: |
-          # 上传dist目录下的图片到OSS
-          # --update参数表示只上传更新的文件
-          ./ossutil cp -r ./dist/assets/images oss://${OSS_BUCKET}/assets/images --update
-        env:
-          # 从GitHub Secrets中获取bucket名称
           OSS_BUCKET: ${{ secrets.OSS_BUCKET }}
 
       - name: Setup Pages
