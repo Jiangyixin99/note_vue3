@@ -44,6 +44,7 @@ export const navBarConfig: NavBarConfig = {
 		LinkPreset.Home,
 		LinkPreset.Archive,
 		LinkPreset.About,
+		LinkPreset.FriendLink,
 		{
 			name: "GitHub",
 			url: "https://github.com/Jiangyixin99", // 内部链接不应包含基础路径，因为会自动添加
