@@ -1,26 +1,27 @@
 ---
-import MainGridLayout from "@layouts/MainGridLayout.astro";
-import FriendLink from "@components/widget/FriendLink.astro";
+import { getEntry, render } from "astro:content";
 import Markdown from "@components/misc/Markdown.astro";
+import FriendLinkComponent from "@components/widget/FriendLink.astro";
+import MainGridLayout from "@layouts/MainGridLayout.astro";
 import I18nKey from "../i18n/i18nKey";
 import { i18n } from "../i18n/translation";
-import { getEntry, render } from "astro:content";
 
 // 友链数据
 const friends = [
-  {
-    name: "Humans",
-    url: "https://humans-y.github.io/Humans-Y/",
-    avatar: "../src/content/friendLink/humans.jpg",
-    description: "这是一个示例博客，分享技术文章和生活感悟",
-  }
+	{
+		name: "Humans",
+		url: "https://humans-y.github.io/Humans-Y/",
+		avatar: "../src/content/friendLink/humans.jpg",
+		description:
+			"这是一个示例博客，分享技术文章和生活感悟11111111111111111111111111111",
+	},
 ];
 
 // 从content/friendLink/index.md读取友链说明内容
 const friendLinkEntry = await getEntry("friendLink", "index");
 
 if (!friendLinkEntry) {
-  throw new Error("Friend link description not found");
+	throw new Error("Friend link description not found");
 }
 
 const { Content } = await render(friendLinkEntry);
@@ -34,7 +35,7 @@ const { Content } = await render(friendLinkEntry);
       <!-- 友链组件部分 -->
       <section class="friend-links-section mb-8">
         <h2 class="text-xl font-semibold mb-4 text-[var(--text-primary)]">我的朋友们</h2>
-        <FriendLink friends={friends} />
+        <FriendLinkComponent friends={friends} />
       </section>
       
       <!-- Markdown说明部分 -->

@@ -12,66 +12,86 @@ const { friends } = Astro.props;
 ---
 
 <div class="friend-links-container">
-  {friends.map((friend) => (
-    <div class="friend-link-card">
+  {friends.map((friend, index) => (
+    <a
+      href={friend.url}
+      target="_blank"
+      rel="noopener noreferrer"
+      class="friend-link-card"
+      aria-label={`访问 ${friend.name} 的网站`}
+      data-index={index}
+    >
       <div class="friend-avatar">
-        <img src={friend.avatar} alt={friend.name} />
+        <img 
+          src={friend.avatar} 
+          alt={friend.name} 
+          loading="lazy"
+        />
       </div>
       <div class="friend-info">
         <h3 class="friend-name">{friend.name}</h3>
         <p class="friend-description">{friend.description}</p>
       </div>
-      <a
-        href={friend.url}
-        target="_blank"
-        rel="noopener noreferrer"
-        class="friend-arrow"
-      >
+      <div class="friend-arrow">
         <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-chevron-right" width="20" height="20" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
           <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
           <path d="M9 6l6 6l-6 6"/>
         </svg>
-      </a>
-    </div>
+      </div>
+    </a>
   ))}
 </div>
 
 <style scoped>
 .friend-links-container {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-  gap: 1rem;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 1.5rem;
   margin: 1.5rem 0;
 }
 
 .friend-link-card {
-  padding: 1px;
   display: flex;
   align-items: center;
   background: var(--card-bg);
-  border-radius: var(--radius-large);
   box-shadow: var(--shadow-sm);
-  transition: all 0.2s ease;
+  transition: all 0.3s ease;
   text-decoration: none;
   color: var(--text-primary);
   border: 1px solid var(--btn-regular-bg);
-  position: relative;
-  min-height: 100px;
+  border-radius: var(--radius-large);
+  overflow: hidden;
+  min-height: 110px;
   gap: 1rem;
+  position: relative;
+}
+
+.friend-link-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-md);
+  border-color: var(--primary);
 }
 
 .friend-avatar {
-  width: 100px;
-  height: 100px;
+  width: 80px;
+  height: 80px;
   overflow: hidden;
   flex-shrink: 0;
   background-color: var(--primary);
+  border-radius: 50%;
+  margin-left: 1rem;
+  transition: all 0.3s ease;
+}
+
+.friend-link-card:hover .friend-avatar {
+  transform: scale(1.05);
 }
 
 .friend-avatar img {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  transition: all 0.3s ease;
 }
 
 .friend-info {
@@ -80,24 +100,35 @@ const { friends } = Astro.props;
   display: flex;
   flex-direction: column;
   justify-content: center;
+  padding-right: 0.5rem;
 }
 
 .friend-name {
   margin: 0 0 0.25rem 0;
-  font-size: 1rem;
+  font-size: 1.1rem;
   font-weight: 600;
   color: var(--primary);
   line-height: 1.2;
+  transition: all 0.3s ease;
+}
+
+.friend-link-card:hover .friend-name {
+  color: var(--primary-dark, var(--primary));
 }
 
 .friend-description {
   margin: 0;
-  font-size: 0.8rem;
+  font-size: 0.85rem;
   color: var(--text-secondary);
   line-height: 1.4;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+  transition: all 0.3s ease;
+}
+
+.friend-link-card:hover .friend-description {
+  color: var(--text-primary);
 }
 
 .friend-arrow {
@@ -108,51 +139,79 @@ const { friends } = Astro.props;
   color: var(--primary);
   height: 100%;
   min-width: 60px;
-  text-decoration: none;
-  transition: all 0.2s ease;
+  transition: all 0.3s ease;
   position: relative;
-  border-top-right-radius: var(--radius-large);
-  border-bottom-right-radius: var(--radius-large);
-  border-top-left-radius: 0;
-  border-bottom-left-radius: 0;
 }
 
-.friend-arrow:hover {
+.friend-link-card:hover .friend-arrow {
   background: var(--primary);
   color: white;
 }
 
-.friend-arrow:hover svg {
-  animation: arrow-move 0.5s ease forwards;
+.friend-arrow svg {
+  width: 20px;
+  height: 20px;
+  transition: all 0.3s ease;
 }
 
-.friend-arrow svg {
-  width: 24px;
-  height: 24px;
-  transition: all 0.2s ease;
+.friend-link-card:hover .friend-arrow svg {
+  animation: arrow-move 0.5s ease forwards;
 }
 
 @keyframes arrow-move {
   0% {
     transform: translateX(0);
   }
+  50% {
+    transform: translateX(8px);
+  }
   100% {
-    transform: translateX(5px);
+    transform: translateX(4px);
+  }
+}
+
+/* 添加卡片进入动画 */
+.friend-link-card {
+  animation: card-fade-in 0.5s ease forwards;
+  opacity: 0;
+}
+
+.friend-link-card:nth-child(1) { animation-delay: 0.1s; }
+.friend-link-card:nth-child(2) { animation-delay: 0.2s; }
+.friend-link-card:nth-child(3) { animation-delay: 0.3s; }
+.friend-link-card:nth-child(4) { animation-delay: 0.4s; }
+.friend-link-card:nth-child(5) { animation-delay: 0.5s; }
+.friend-link-card:nth-child(6) { animation-delay: 0.6s; }
+
+@keyframes card-fade-in {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
   }
 }
 
 @media (max-width: 768px) {
   .friend-links-container {
     grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+  
+  .friend-link-card {
+    min-height: 100px;
   }
   
   .friend-avatar {
-    width: 45px;
-    height: 45px;
+    width: 60px;
+    height: 60px;
+    margin-left: 0.75rem;
   }
   
   .friend-name {
-    font-size: 0.95rem;
+    font-size: 1rem;
   }
   
   .friend-description {
@@ -160,14 +219,41 @@ const { friends } = Astro.props;
   }
   
   .friend-arrow {
-    padding-left: 0.75rem;
-    padding-right: 0.75rem;
     min-width: 50px;
   }
   
   .friend-arrow svg {
-    width: 20px;
-    height: 20px;
+    width: 18px;
+    height: 18px;
+  }
+}
+
+@media (max-width: 480px) {
+  .friend-links-container {
+    margin: 1rem 0;
+  }
+  
+  .friend-link-card {
+    min-height: 90px;
+    gap: 0.75rem;
+  }
+  
+  .friend-avatar {
+    width: 50px;
+    height: 50px;
+    margin-left: 0.5rem;
+  }
+  
+  .friend-name {
+    font-size: 0.9rem;
+  }
+  
+  .friend-description {
+    font-size: 0.7rem;
+  }
+  
+  .friend-arrow {
+    min-width: 45px;
   }
 }
 </style>
