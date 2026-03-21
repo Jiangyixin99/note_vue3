@@ -1,7 +1,7 @@
 ---
 title: 有趣的
 published: 2026-03-21
-description: "如何使用此博客模板"
+description: "有趣的应用"
 image: ""
 tags: ["推荐"]
 category: 推荐
