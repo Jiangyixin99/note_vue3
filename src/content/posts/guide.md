@@ -2,7 +2,7 @@
 title: Blog User Guide
 published: 2024-04-01
 description: "How to use this blog template."
-image: "https://jiangyixin.oss-cn-beijing.aliyuncs.com/content/posts/cover_guide.webp"
+image: "./cover_guide.webp"
 tags: ["Fuwari", "Blogging", "Customization"]
 category: 指南
 draft: false

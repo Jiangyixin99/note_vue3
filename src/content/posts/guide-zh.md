@@ -2,7 +2,7 @@
 title: 博客使用指南
 published: 2024-04-01
 description: "如何使用此博客模板"
-image: "https://jiangyixin.oss-cn-beijing.aliyuncs.com//content/posts/cover_guide-zh.webp"
+image: "./cover_guide-zh.webp"
 tags: ["指南", "博客", "自定义"]
 category: 指南
 draft: false
